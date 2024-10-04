@@ -1,13 +1,14 @@
+import { GitHub } from "@mui/icons-material";
+import { Container, styled } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { GitHub } from "@mui/icons-material";
 import { type ReactNode } from "react";
 
-import { DebouncedInput } from "../modules/molecules/DebouncedInput/DebouncedInput";
-import { UserNameForm } from "../modules/user/components/UserNameForm";
-import { useUserNameContext } from "../modules/user/providers/UserNameProvider";
-import { Container, styled } from "@mui/material";
+import { DebouncedInput } from "@/modules/molecules/DebouncedInput/DebouncedInput";
+import { UserNameForm } from "@/modules/user/components/UserNameForm";
+import { useUserNameContext } from "@/modules/user/providers/UserNameProvider";
+
 
 type IndexLayoutProps = {
   children: ReactNode;

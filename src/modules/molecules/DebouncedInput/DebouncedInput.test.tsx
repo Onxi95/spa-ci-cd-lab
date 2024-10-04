@@ -1,6 +1,8 @@
 import { render, fireEvent, waitFor } from "@testing-library/react";
-import { DebouncedInput } from "./DebouncedInput";
 import { describe, expect, it, vi } from "vitest";
+
+import { DebouncedInput } from "./DebouncedInput";
+
 
 describe("DebouncedInput", () => {
   it("calls onDebounce after specified delay", async () => {

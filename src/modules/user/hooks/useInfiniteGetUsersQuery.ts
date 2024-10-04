@@ -1,6 +1,8 @@
+
 import { skipToken, useInfiniteQuery } from "@tanstack/react-query";
-import { apiClient } from "../../api";
-import type { GetUsersParams } from "../../api/getUsers";
+
+import { apiClient } from "@/modules/api";
+import type { GetUsersParams } from "@/modules/api/getUsers";
 
 type UseInfiniteGetUsersQueryParams = Omit<GetUsersParams["query"], "page"> & {
   userName: string;

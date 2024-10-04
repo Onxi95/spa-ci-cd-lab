@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import { noop } from "../../../lib/noop";
+
+import { noop } from "@/lib/noop";
+
 
 type UserNameContext = {
   userName: string;

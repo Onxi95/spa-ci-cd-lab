@@ -6,6 +6,7 @@
   ],
   "include": ["./vitest.setup.ts"],
   "compilerOptions": {
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+    "skipLibCheck": true
   }
 }

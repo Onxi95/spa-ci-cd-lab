@@ -1,4 +1,6 @@
+
 import Grid from "@mui/material/Grid2";
+
 import type { UserDetails } from "../../types";
 import { UserCard } from "../UserCard";
 

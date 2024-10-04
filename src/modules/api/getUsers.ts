@@ -1,5 +1,7 @@
 import * as Yup from "yup";
+
 import type { UserDetails } from "../user/types";
+
 
 // Generally, we should use type-safe, auto-generated contracts
 // like https://github.com/github/rest-api-description in our API clients,
@@ -35,7 +37,7 @@ export const getUsers = async ({
   // 403 - not specified in docs - rate limit
   // 503 Service unavailable
   if (!request.ok) {
-    throw new GetUsersError(request.status);
+    throw new GetUsersError(request.status as GetUserErrorCodes);
   }
 
   const response = await request.json();

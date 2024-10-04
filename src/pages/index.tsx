@@ -1,10 +1,12 @@
-import InfiniteScroll from "react-infinite-scroller";
-import { useUserNameContext } from "../modules/user/providers/UserNameProvider";
-import { useInfiniteGetUsersQuery } from "../modules/user/hooks/useInfiniteGetUsersQuery";
-import { UsersList } from "../modules/user/components/UsersList/UsersList";
-import { UserListSkeleton } from "../modules/user/components/UsersList/UsersListSkeleton";
-import { GetUsersError, type GetUserErrorCodes } from "../modules/api/getUsers";
+
 import { Alert } from "@mui/material";
+import InfiniteScroll from "react-infinite-scroller";
+
+import { type GetUserErrorCodes, GetUsersError } from "@/modules/api/getUsers";
+import { UsersList } from "@/modules/user/components/UsersList/UsersList";
+import { UserListSkeleton } from "@/modules/user/components/UsersList/UsersListSkeleton";
+import { useInfiniteGetUsersQuery } from "@/modules/user/hooks/useInfiniteGetUsersQuery";
+import { useUserNameContext } from "@/modules/user/providers/UserNameProvider";
 
 const apiErrorMessages = {
   403: "You have exceeded the allowed request limit. Please wait a moment before trying again.",

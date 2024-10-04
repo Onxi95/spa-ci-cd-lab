@@ -1,10 +1,14 @@
-import { render, screen } from "@testing-library/react";
-import { IndexPage } from "./index";
-import * as userContext from "../modules/user/providers/UserNameProvider";
-import * as userQuery from "../modules/user/hooks/useInfiniteGetUsersQuery";
-import { beforeEach, describe, expect, it, vi, Mock } from "vitest";
-import { GetUsersError } from "../modules/api/getUsers";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
+import { render, screen } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi, Mock } from "vitest";
+
+import { GetUsersError } from "@/modules/api/getUsers";
+import * as userQuery from "@/modules/user/hooks/useInfiniteGetUsersQuery";
+import * as userContext from "@/modules/user/providers/UserNameProvider";
+
+import { IndexPage } from "./index";
+
+
 
 vi.mock("../modules/user/providers/UserNameProvider");
 vi.mock("../modules/user/hooks/useInfiniteGetUsersQuery");
