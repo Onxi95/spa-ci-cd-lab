@@ -25,6 +25,10 @@ export const UserNameForm = ({ children }: UserNameFormProps) => {
   return (
     <FormProvider {...providerProps}>
       <StyledForm onSubmit={(e) => e.preventDefault()}>
+        {/* 
+          The render props pattern used here allows for greater flexibility 
+          and reuse by treating the child function as a first-class citizen  
+         */}
         {children(providerProps)}
       </StyledForm>
     </FormProvider>

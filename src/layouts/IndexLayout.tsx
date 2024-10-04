@@ -9,7 +9,6 @@ import { DebouncedInput } from "@/modules/molecules/DebouncedInput/DebouncedInpu
 import { UserNameForm } from "@/modules/user/components/UserNameForm";
 import { useUserNameContext } from "@/modules/user/providers/UserNameProvider";
 
-
 type IndexLayoutProps = {
   children: ReactNode;
 };
@@ -36,6 +35,7 @@ export const IndexLayout = ({ children }: IndexLayoutProps) => {
               <DebouncedInput
                 {...register("userName")}
                 waitFor={2000}
+                // Function composition, handleSubmit and the function to set userName
                 onDebounce={handleSubmit(({ userName }) => {
                   setUserName(userName);
                 })}

@@ -1,4 +1,3 @@
-
 import Grid from "@mui/material/Grid2";
 
 import type { UserDetails } from "../../types";
@@ -8,6 +7,7 @@ type UsersListProps = {
   users: UserDetails[];
 };
 
+// It's a pure function, as it doesn't have any side effects
 export const UsersList = ({ users }: UsersListProps) => {
   return (
     <Grid container spacing={2}>
