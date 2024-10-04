@@ -2,7 +2,6 @@ import * as Yup from "yup";
 
 import type { UserDetails } from "../user/types";
 
-
 // Generally, we should use type-safe, auto-generated contracts
 // like https://github.com/github/rest-api-description in our API clients,
 // but it's a simplified example of a communication
@@ -23,8 +22,6 @@ export class GetUsersError extends Error {
 export const getUsers = async ({
   query: { userName, page, pageSize },
 }: GetUsersParams): Promise<UserDetails[]> => {
-  await sleep();
-
   const request = await fetch(
     `${
       import.meta.env.VITE_API_BASE_URL
@@ -58,7 +55,3 @@ const userSchema = Yup.object().shape({
 const schema = Yup.object().shape({
   items: Yup.array().of(userSchema).required(),
 });
-
-const sleep = () => {
-  return new Promise((resolve) => setTimeout(resolve, 100000));
-};
