@@ -5,7 +5,6 @@ import { UserNameProvider } from "@/modules/user/providers/UserNameProvider";
 
 import { IndexPage } from "./pages";
 
-
 function App() {
   return (
     <MuiProvider>
