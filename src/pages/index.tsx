@@ -1,4 +1,3 @@
-
 import { Alert } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroller";
 
@@ -43,12 +42,7 @@ export const IndexPage = () => {
         <Alert severity="error">{apiErrorMessages[error.statusCode]}</Alert>
       );
     }
-    return (
-      <div>
-        {JSON.stringify(error)}
-        <Alert severity="error">{apiErrorMessages.unknown}</Alert>;
-      </div>
-    );
+    return <Alert severity="error">{apiErrorMessages.unknown}</Alert>;
   }
   if (isSuccess) {
     const users = data.pages.flatMap((list) => list);
