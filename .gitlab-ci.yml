@@ -1,0 +1,38 @@
+stages:
+  - checks
+  - test
+  - build
+
+variables:
+  VITE_API_BASE_URL: "http://localhost"
+
+checks:
+  stage: checks
+  image: node:latest
+  script:
+    - npm ci
+    - npm run lint
+    - npm run tsc
+  only:
+    - main
+
+test:
+  stage: test
+  image: node:latest
+  script:
+    - npm ci
+    - VITE_API_BASE_URL=$VITE_API_BASE_URL npm run test
+  only:
+    - main
+
+build:
+  stage: build
+  image: node:latest
+  script:
+    - npm ci
+    - VITE_API_BASE_URL=$VITE_API_BASE_URL npm run build
+  needs:
+    - checks
+    - test
+  only:
+    - main
