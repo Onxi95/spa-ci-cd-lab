@@ -57,6 +57,7 @@ export const IndexPage = () => {
         // https://github.com/danbovey/react-infinite-scroller/issues/133#issuecomment-361241470
         loader={<UserListSkeleton key={0} />}
       >
+        v1
         <UsersList users={users} />
       </InfiniteScroll>
     );
