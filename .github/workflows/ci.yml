@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  lint:
+  checks:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -26,10 +26,13 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run ESLint
         run: npm run lint
+
+      - name: TSC
+        run: npm run tsc
 
   test:
     runs-on: ubuntu-latest
@@ -44,7 +47,7 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run tests
         env:
@@ -54,7 +57,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    needs: test
+    needs: [lint, test]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -65,7 +68,7 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build application
         env:
