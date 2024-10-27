@@ -1,0 +1,57 @@
+pipeline {
+    agent {
+        docker {
+            image 'node:20'
+            args '-u root'
+        }
+    }
+    environment {
+        CI = 'true'
+        gitlabBranch = "feat/ci-demo"
+        VITE_API_BASE_URL = "http://localhost"
+    }
+    stages {
+        stage('Clone') {
+            steps {
+                sshagent(['gitlab_jenkins_key']) {
+                    git branch: "${gitlabBranch}", url: 'git@gitlab.com:p2599/gh-api-poc.git'
+                }
+            }
+        }
+        stage('Checks and Tests') {
+            parallel {
+                stage('Checks') {
+                    steps {
+                        updateGitlabCommitStatus name: 'checks', state: 'pending'
+                        script {
+                            sh 'npm ci'
+                            sh 'npm run lint'
+                            sh 'npm run tsc'
+                        }
+                        updateGitlabCommitStatus name: 'checks', state: 'success'
+                    }
+                }
+                stage('Test') {
+                    steps {
+                        updateGitlabCommitStatus name: 'test', state: 'pending'
+                        script {
+                            sh 'npm ci'
+                            sh "VITE_API_BASE_URL=${VITE_API_BASE_URL} npm run test"
+                        }
+                        updateGitlabCommitStatus name: 'test', state: 'success'
+                    }
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                updateGitlabCommitStatus name: 'build', state: 'pending'
+                script {
+                    sh 'npm ci'
+                    sh "VITE_API_BASE_URL=${VITE_API_BASE_URL} npm run build"
+                }
+                updateGitlabCommitStatus name: 'build', state: 'success'
+            }
+        }
+    }
+}
