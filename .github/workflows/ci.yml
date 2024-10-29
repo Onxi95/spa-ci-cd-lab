@@ -1,76 +1,42 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
+   pull_request:
     branches:
       - main
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+env:
+  VITE_API_BASE_URL: "http://localhost"
 
 jobs:
   checks:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
     steps:
-      - name: Checkout code
         uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version-file: "package.json"
-          cache: "npm"
-
-      - name: Install dependencies
         run: npm ci
-
-      - name: Run ESLint
         run: npm run lint
-
-      - name: TSC
         run: npm run tsc
 
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
     steps:
-      - name: Checkout code
         uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version-file: "package.json"
-          cache: "npm"
-
-      - name: Install dependencies
         run: npm ci
-
-      - name: Run tests
-        env:
-          VITE_API_BASE_URL: "http://localhost"
         run: npm run test
 
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
     needs: [checks, test]
     steps:
-      - name: Checkout code
         uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version-file: "package.json"
-          cache: "npm"
-
-      - name: Install dependencies
         run: npm ci
-
-      - name: Build application
-        env:
-          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
         run: npm run build
